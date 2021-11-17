@@ -1,26 +1,28 @@
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-	padding: 2em 3em;
-	border-radius: 1em;
-	border: 0;
-	cursor: pointer;
-
-	background: #51a3b8;
-	font-size: 20px;
-	color: white;
-	border-radius: 7px;
-	box-shadow: 0 7px 0px #387796;
-	display: inline-block;
-	transition: all 0.2s;
-	position: relative;
-	padding: 20px 25px;
 	position: relative;
 	top: 0;
+	display: inline-block;
+	border: 0;
+	padding: 1em 2em;
+	border-radius: 0.4em;
+	cursor: pointer;
+
+	background: #7051b8;
+	color: white;
+	box-shadow: 0 0.4em 0px #553795;
+
+	font-size: 2em;
+	font-family: 'Saira Condensed', sans-serif;
+	font-weight: 700;
+	letter-spacing: 2pt;
+
+	transition: all 0.2s;
 
 	&:active {
-		top: 3px;
-		box-shadow: 0 2px 0px #387796;
+		top: 0.4em;
+		box-shadow: 0 2px 0px #553795;
 		transition: all 0.2s;
 	}
 `;

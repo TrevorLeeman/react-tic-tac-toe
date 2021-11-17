@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import X from './X';
 import O from './O';
-import { useCallback } from 'react';
 
 const StyledGridCell = styled.div`
 	background-color: #000000cc;
@@ -22,12 +21,12 @@ const GridCell = ({
 	output,
 	setSelected,
 }) => {
-	const cellSelected = useCallback(() => {
+	const cellSelected = () => {
 		if (occupied === false) {
 			let XorO = turnCounter % 2 ? 'X' : 'O';
 			setSelected(row, column, XorO);
 		}
-	}, [occupied, turnCounter, row, column, setSelected]);
+	};
 
 	return (
 		<StyledGridCell onClick={cellSelected} onMouseEnter={hoverCell}>

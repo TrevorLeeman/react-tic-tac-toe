@@ -15,21 +15,24 @@ const StyledHeader = styled.header`
 		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2);
 
 	@media (max-width: 420px) {
-		justify-content: center;
+		min-height: 10em;
+		padding: 2em;
 	} ;
 `;
 
 const StyledAppTitle = styled.h1`
 	vertical-align: middle;
-	font-family: 'Anton', sans-serif;
+	/* font-family: 'Anton', sans-serif; */
+	font-family: 'Saira Condensed', sans-serif;
 	font-size: 3em;
+	font-weight: 700;
 	letter-spacing: 2pt;
 `;
 
-const Header = ({ className }) => {
+const Header = ({ title, className }) => {
 	return (
 		<StyledHeader className={className}>
-			<StyledAppTitle>React-Tac-Toe</StyledAppTitle>
+			<StyledAppTitle>{title}</StyledAppTitle>
 			<SocialList />
 		</StyledHeader>
 	);

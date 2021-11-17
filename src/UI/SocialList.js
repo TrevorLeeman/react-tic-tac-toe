@@ -17,6 +17,11 @@ const StyledSocialCard = styled.footer`
 				transform: scale(1.1);
 			}
 
+			@media (max-width: 420px) {
+				width: 5em;
+				height: 5em;
+			}
+
 			svg {
 				width: 100%;
 			}
