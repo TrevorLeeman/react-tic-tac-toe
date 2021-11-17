@@ -1,6 +1,8 @@
-import Grid from './Grid/Grid';
 import { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import Header from './UI/Header';
+import Button from './UI/Button';
+import Grid from './Grid/Grid';
 
 const CssReset = createGlobalStyle`
   *{
@@ -17,10 +19,8 @@ const AppContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
 
 	background: linear-gradient(
 		270deg,
@@ -50,13 +50,9 @@ const AppContainer = styled.div`
 			background-position: 0% 50%;
 		}
 	}
-`;
 
-const StyledApp = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	font-size: 0.4em;
 
 	@media (min-width: 420px) {
@@ -70,6 +66,23 @@ const StyledApp = styled.div`
 	@media (min-width: 800px) {
 		font-size: 1em;
 	}
+`;
+
+const StyledApp = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	flex-wrap: wrap;
+`;
+
+const StyledGrid = styled(Grid)`
+	margin-top: 3em;
+	margin-bottom: 3em;
+`;
+
+const StyledHeader = styled(Header)`
+	margin-bottom: 3em;
 `;
 
 const createInitialBoardState = (rows, columns) => {
@@ -96,7 +109,15 @@ const App = () => {
 	const [turnCounter, setTurnCounter] = useState(1);
 	const [gameComplete, setGameComplete] = useState(false);
 
-	const checkBoardState = (currentBoardState) => {};
+	const checkBoardState = (currentBoardState) => {
+		// Check if we someone has won
+		// Check if we can make any more moves
+	};
+
+	const resetBoardState = () => {
+		console.log('hi');
+		setBoardState(createInitialBoardState(rows, columns));
+	};
 
 	const updateBoardState = (row, column, XorO) => {
 		setBoardState((currentBoardState) => {
@@ -111,8 +132,12 @@ const App = () => {
 		<>
 			<CssReset />
 			<AppContainer>
+				<StyledHeader />
 				<StyledApp>
-					<Grid
+					<Button clickHandler={resetBoardState}>
+						{gameComplete ? 'New Game' : 'Reset Game'}
+					</Button>
+					<StyledGrid
 						rows={rows}
 						columns={columns}
 						boardState={boardState}

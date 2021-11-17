@@ -11,7 +11,10 @@ const StyledGrid = styled.div`
 	padding: 2em;
 	border-radius: 1em;
 	box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
-		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2);
+		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+		inset 0 4px 5px 0 rgba(255, 255, 255, 0.14),
+		inset 0 1px 10px 0 rgba(255, 255, 255, 0.12),
+		inset 0 2px 4px -1px rgba(255, 255, 255, 0.2);
 
 	display: grid;
 	grid-template-rows: ${(props) => `repeat(${props.rows}, 1fr)`};
@@ -57,12 +60,13 @@ const Grid = ({
 	turnCounter,
 	gameComplete,
 	updateBoardState,
+	className,
 }) => {
 	const setSelected = (row, column, XorO) =>
 		updateBoardState(row, column, XorO);
 
 	return (
-		<StyledGrid rows={rows} columns={columns}>
+		<StyledGrid rows={rows} columns={columns} className={className}>
 			{createGridCells(rows, columns, boardState, turnCounter, setSelected)}
 		</StyledGrid>
 	);
