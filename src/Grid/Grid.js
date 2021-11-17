@@ -8,8 +8,8 @@ const StyledGrid = styled.div`
 	max-height: 70vh;
 
 	background-color: #ffffff80;
-	padding: 2em;
-	border-radius: 1em;
+	padding: 1.25rem;
+	border-radius: 1rem;
 	box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
 		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2),
 		inset 0 4px 5px 0 rgba(255, 255, 255, 0.14),
@@ -19,7 +19,12 @@ const StyledGrid = styled.div`
 	display: grid;
 	grid-template-rows: ${(props) => `repeat(${props.rows}, 1fr)`};
 	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
-	grid-gap: 1.25em;
+	grid-gap: 0.8rem;
+
+	@media (min-width: 800px) {
+		grid-gap: 1.25rem;
+		padding: 2rem;
+	} ;
 `;
 
 const createGridCells = (
@@ -62,13 +67,12 @@ const Grid = ({
 	turnCounter,
 	gameComplete,
 	updateBoardState,
-	className,
 }) => {
 	const setSelected = (row, column, XorO) =>
 		updateBoardState(row, column, XorO);
 
 	return (
-		<StyledGrid rows={rows} columns={columns} className={className}>
+		<StyledGrid rows={rows} columns={columns}>
 			{createGridCells(
 				rows,
 				columns,

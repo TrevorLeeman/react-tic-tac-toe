@@ -3,12 +3,27 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Header from './UI/Header';
 import Button from './UI/Button';
 import Grid from './Grid/Grid';
+import Footer from './UI/Footer';
 
 const CssReset = createGlobalStyle`
   *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+
+  html{
+	font-family: 'Saira Condensed', sans-serif;
+
+	font-size: 0.6em;
+
+	@media (min-width: 420px) {
+		font-size: 0.8em;
+	}
+
+	@media (min-width: 600px) {
+		font-size: 1em;
+	}
   }
 `;
 
@@ -51,21 +66,6 @@ const AppContainer = styled.div`
 			background-position: 0% 50%;
 		}
 	}
-
-	font-family: 'Anton', sans-serif;
-	font-size: 0.4em;
-
-	@media (min-width: 420px) {
-		font-size: 0.6em;
-	}
-
-	@media (min-width: 600px) {
-		font-size: 0.8em;
-	}
-
-	@media (min-width: 800px) {
-		font-size: 1em;
-	}
 `;
 
 const StyledApp = styled.div`
@@ -75,15 +75,11 @@ const StyledApp = styled.div`
 	flex-direction: column;
 	flex-wrap: wrap;
 	height: 100%;
+	padding: 2rem 0;
 `;
 
-const StyledGrid = styled(Grid)`
-	margin-top: 3em;
-	margin-bottom: 3em;
-`;
-
-const StyledHeader = styled(Header)`
-	margin-bottom: 2.2em;
+const StyledButton = styled(Button)`
+	margin-bottom: 2rem;
 `;
 
 const createInitialBoardState = (rows, columns) => {
@@ -197,12 +193,12 @@ const App = () => {
 		<>
 			<CssReset />
 			<AppContainer>
-				<StyledHeader title='React-Tac-Toe' />
+				<Header title='React-Tac-Toe' />
 				<StyledApp>
-					<Button clickHandler={resetBoardState}>
+					<StyledButton clickHandler={resetBoardState}>
 						{gameComplete ? 'New Game' : 'Reset Game'}
-					</Button>
-					<StyledGrid
+					</StyledButton>
+					<Grid
 						rows={rows}
 						columns={columns}
 						boardState={boardState}
@@ -211,6 +207,7 @@ const App = () => {
 						updateBoardState={updateBoardState}
 					/>
 				</StyledApp>
+				<Footer />
 			</AppContainer>
 		</>
 	);

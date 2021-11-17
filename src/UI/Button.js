@@ -5,15 +5,15 @@ const StyledButton = styled.button`
 	top: 0;
 	display: inline-block;
 	border: 0;
-	padding: 1em 2em;
-	border-radius: 0.4em;
+	padding: 2rem 3rem;
+	border-radius: 1rem;
 	cursor: pointer;
 
 	background: #7051b8;
 	color: white;
-	box-shadow: 0 0.4em 0px #553795;
+	box-shadow: 0 1rem 0 #553795;
 
-	font-size: 2em;
+	font-size: 2rem;
 	font-family: 'Saira Condensed', sans-serif;
 	font-weight: 700;
 	letter-spacing: 2pt;
@@ -21,7 +21,7 @@ const StyledButton = styled.button`
 	transition: all 0.2s;
 
 	&:active {
-		top: 0.4em;
+		top: 1rem;
 		box-shadow: 0 2px 0px #553795;
 		transition: all 0.2s;
 	}

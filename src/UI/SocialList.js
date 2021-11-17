@@ -5,21 +5,16 @@ import GitHubIcon from './Icons/GitHubIcon';
 const StyledSocialCard = styled.footer`
 	ul {
 		display: flex;
-		gap: 1em;
+		gap: 1rem;
 		list-style: none;
 
 		li {
-			width: 3em;
-			width: 3em;
+			width: 5rem;
+			width: 5rem;
 			transition: all 0.5s ease;
 
 			&:hover {
 				transform: scale(1.1);
-			}
-
-			@media (max-width: 420px) {
-				width: 5em;
-				height: 5em;
 			}
 
 			svg {

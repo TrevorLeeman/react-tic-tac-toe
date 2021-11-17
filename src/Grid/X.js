@@ -10,8 +10,8 @@ const XBar = styled.div`
 	left: 50%;
 	top: 50%;
 	height: 80%;
-	width: 1.5em;
-	border-radius: 0.3em;
+	width: 1.5rem;
+	border-radius: 0.3rem;
 	background-color: white;
 	box-shadow: 0 12px 17px 2px rgba(255, 255, 255, 0.14),
 		0 5px 22px 4px rgba(255, 255, 255, 0.12),
@@ -26,9 +26,9 @@ const XBar2 = styled(XBar)`
 	transform: translate(-50%, -50%) rotate(-45deg);
 `;
 
-const X = () => {
+const X = ({ className }) => {
 	return (
-		<StyledX>
+		<StyledX className={className}>
 			<XBar1 />
 			<XBar2 />
 		</StyledX>

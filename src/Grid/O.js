@@ -11,7 +11,7 @@ const Outline = styled.div`
 	top: 50%;
 	height: 80%;
 	width: 80%;
-	border: solid white 1.5em;
+	border: solid white 1.5rem;
 	border-radius: 80%;
 	transform: translate(-50%, -50%);
 	box-shadow: 0 12px 17px 2px rgba(255, 255, 255, 0.14),
@@ -19,9 +19,9 @@ const Outline = styled.div`
 		0 7px 8px -4px rgba(255, 255, 255, 0.2);
 `;
 
-const O = () => {
+const O = ({ className }) => {
 	return (
-		<StyledO>
+		<StyledO className={className}>
 			<Outline />
 		</StyledO>
 	);

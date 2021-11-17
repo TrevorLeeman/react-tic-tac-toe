@@ -6,7 +6,7 @@ import O from './O';
 const StyledGridCell = styled.div`
 	position: relative;
 	background-color: #000000cc;
-	border-radius: 1em;
+	border-radius: 1rem;
 	box-shadow: inset 0 4px 5px 0 rgba(0, 0, 0, 0.14),
 		inset 0 1px 10px 0 rgba(0, 0, 0, 0.12),
 		inset 0 2px 4px -1px rgba(0, 0, 0, 0.2);
@@ -17,11 +17,27 @@ const HoverArea = styled.div`
 	top: 50%;
 	left: 50%;
 	background-color: transparent;
-	width: 70%;
-	height: 70%;
+	width: 75%;
+	height: 75%;
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	cursor: pointer;
+`;
+
+const HoverX = styled(X)`
+	opacity: 0.75;
+
+	div {
+		box-shadow: unset;
+	}
+`;
+
+const HoverO = styled(O)`
+	opacity: 0.75;
+
+	div {
+		box-shadow: unset;
+	}
 `;
 
 const GridCell = ({
@@ -63,8 +79,8 @@ const GridCell = ({
 			/>
 			{(output === 'X' && <X />) ||
 				(output === 'O' && <O />) ||
-				(isHovered && XorO === 'X' && gameComplete === false && <X />) ||
-				(isHovered && XorO === 'O' && gameComplete === false && <O />)}
+				(isHovered && XorO === 'X' && gameComplete === false && <HoverX />) ||
+				(isHovered && XorO === 'O' && gameComplete === false && <HoverO />)}
 		</StyledGridCell>
 	);
 };
