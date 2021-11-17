@@ -35,19 +35,7 @@ const AppContainer = styled.div`
 		#577590,
 		#277da1
 	);
-	/* background: linear-gradient(
-		270deg,
-		#ff4800,
-		#ff5400,
-		#ff6000,
-		#ff6d00,
-		#ff7900,
-		#ff8500,
-		#ff9100,
-		#ff9e00,
-		#ffaa00,
-		#ffb600
-	); */
+
 	background-size: 1000% 1000%;
 
 	animation: animatedGradient 20s ease infinite;
@@ -112,33 +100,41 @@ const createInitialBoardState = (rows, columns) => {
 	return initialBoardState;
 };
 
-const checkRows = (currentBoardState, rowLen, lengthReqForWin) => {
+const checkRows = (currentBoardState, lengthReqForWin) => {
 	let gameIsWon = false;
-	let winner = '';
+	let winner = null;
 
-	currentBoardState.forEach((currentRow) => {
-		const getXs = currentRow.filter((XorO) => XorO === 'X');
-		const getOs = currentRow.filter((XorO) => XorO === 'O');
+	// Loop through our 2d board state array
+	for (let currentRow of currentBoardState) {
+		let inARow = [];
+		for (let XorO of currentRow) {
+			if (XorO === inARow[0] && XorO !== '') {
+				// If current tile is same as previous
+				inARow.push(XorO);
 
-		if (getXs.length === lengthReqForWin) {
-			gameIsWon = true;
-			winner = 'X';
+				if (inARow.length === lengthReqForWin && inARow[0] !== '') {
+					// If we've reached a winning state
+					gameIsWon = true;
+
+					if (inARow[0] === 'X') {
+						winner = 'X';
+					} else if (inARow[0] === 'O') {
+						winner = 'O';
+					}
+
+					break;
+				}
+			} else if (XorO !== '') {
+				// Reset our tracking array with new starting value
+				inARow = [XorO];
+			}
 		}
-		if (getOs.length === lengthReqForWin) {
-			gameIsWon = true;
-			winner = 'O';
-		}
-	});
+	}
 
 	return [gameIsWon, winner];
 };
 
-const checkColumns = (
-	currentBoardState,
-	rowLen,
-	columnLen,
-	lengthReqForWin
-) => {
+const checkColumns = (currentBoardState, lengthReqForWin) => {
 	let gameIsWon = false;
 	let winner = '';
 	let columns = createInitialBoardState();
@@ -146,21 +142,16 @@ const checkColumns = (
 	return [gameIsWon, winner];
 };
 
-const checkDiagonals = (
-	currentBoardState,
-	rowLen,
-	columnLen,
-	lengthReqForWin
-) => {
+const checkDiagonals = (currentBoardState, lengthReqForWin) => {
 	let gameIsWon = false;
 	let winner = '';
 	return [gameIsWon, winner];
 };
 
 const App = () => {
-	const [rows, setRows] = useState(3);
-	const [columns, setColumns] = useState(3);
-	const [lengthReqForWin, setLengthReqForWin] = useState(2);
+	const [rows, setRows] = useState(5);
+	const [columns, setColumns] = useState(5);
+	const [lengthReqForWin, setLengthReqForWin] = useState(5);
 	const [boardState, setBoardState] = useState(
 		createInitialBoardState(rows, columns)
 	);
@@ -183,25 +174,20 @@ const App = () => {
 	}, []);
 
 	const checkForWinner = useCallback(() => {
-		const [rowWin, rowWinner] = checkRows(boardState, columns, lengthReqForWin);
-		const [columnWin, columnWinner] = checkColumns(
-			boardState,
-			columns,
-			rows,
-			lengthReqForWin
-		);
+		const [rowWin, rowWinner] = checkRows(boardState, lengthReqForWin);
+		const [columnWin, columnWinner] = checkColumns(boardState, lengthReqForWin);
 		const [diagonalWin, diagonalWinner] = checkDiagonals(
 			boardState,
-			columns,
-			rows,
 			lengthReqForWin
 		);
 
 		if (rowWin || columnWin || diagonalWin) {
 			setGameComplete(true);
-			console.log('We have a winner!!!');
+			console.log(
+				`We have a winner!!! ${rowWinner ?? columnWinner ?? diagonalWinner}`
+			);
 		}
-	}, [boardState, columns, rows]);
+	}, [boardState, lengthReqForWin]);
 
 	useEffect(() => {
 		checkForWinner();

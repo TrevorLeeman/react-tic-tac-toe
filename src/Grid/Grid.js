@@ -27,6 +27,7 @@ const createGridCells = (
 	columns,
 	boardState,
 	turnCounter,
+	gameComplete,
 	setSelected
 ) => {
 	let gridCells = [];
@@ -44,6 +45,7 @@ const createGridCells = (
 					turnCounter={turnCounter}
 					occupied={occupied}
 					output={output}
+					gameComplete={gameComplete}
 					setSelected={setSelected}
 				/>
 			);
@@ -67,7 +69,14 @@ const Grid = ({
 
 	return (
 		<StyledGrid rows={rows} columns={columns} className={className}>
-			{createGridCells(rows, columns, boardState, turnCounter, setSelected)}
+			{createGridCells(
+				rows,
+				columns,
+				boardState,
+				turnCounter,
+				gameComplete,
+				setSelected
+			)}
 		</StyledGrid>
 	);
 };

@@ -22,7 +22,6 @@ const StyledHeader = styled.header`
 
 const StyledAppTitle = styled.h1`
 	vertical-align: middle;
-	/* font-family: 'Anton', sans-serif; */
 	font-family: 'Saira Condensed', sans-serif;
 	font-size: 3em;
 	font-weight: 700;
