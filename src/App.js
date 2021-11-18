@@ -133,7 +133,15 @@ const checkRows = (currentBoardState, lengthReqForWin) => {
 const checkColumns = (currentBoardState, lengthReqForWin) => {
 	let gameIsWon = false;
 	let winner = '';
-	let columns = createInitialBoardState();
+	let columnBasedBoardState = [];
+
+	console.log(currentBoardState.entries());
+
+	for (let [index, currentRow] of currentBoardState.entries()) {
+		for (let row of currentRow) {
+		}
+	}
+	// console.log(currentBoardState);
 
 	return [gameIsWon, winner];
 };
@@ -147,7 +155,7 @@ const checkDiagonals = (currentBoardState, lengthReqForWin) => {
 const App = () => {
 	const [rows, setRows] = useState(5);
 	const [columns, setColumns] = useState(5);
-	const [lengthReqForWin, setLengthReqForWin] = useState(5);
+	const [lengthReqForWin, setLengthReqForWin] = useState(4);
 	const [boardState, setBoardState] = useState(
 		createInitialBoardState(rows, columns)
 	);
