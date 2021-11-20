@@ -1,5 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import GridCell from './GridCell';
+
+const flipAnimation = keyframes`
+	0% {
+		-webkit-transform: rotateY(0);
+		transform: rotateY(0);
+	}
+	100% {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
+	}
+`;
 
 const StyledGrid = styled.div`
 	width: 80vw;
@@ -21,10 +32,12 @@ const StyledGrid = styled.div`
 	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
 	grid-gap: 0.8rem;
 
+	animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+
 	@media (min-width: 800px) {
 		grid-gap: 1.25rem;
 		padding: 2rem;
-	} ;
+	}
 `;
 
 const createGridCells = (

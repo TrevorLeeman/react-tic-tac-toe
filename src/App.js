@@ -4,6 +4,12 @@ import Header from './UI/Header';
 import Button from './UI/Button';
 import Grid from './Grid/Grid';
 import Footer from './UI/Footer';
+import {
+	createInitialBoardState,
+	checkBoardState,
+	checkColumns,
+	checkDiagonals,
+} from './Game/GameLogic';
 
 const CssReset = createGlobalStyle`
   *{
@@ -82,76 +88,6 @@ const StyledButton = styled(Button)`
 	margin-bottom: 2rem;
 `;
 
-const createInitialBoardState = (rows, columns) => {
-	// Initialize boardState arrays
-	let initialBoardState = [];
-
-	for (let row = 0; row < rows; row++) {
-		initialBoardState[row] = [];
-		for (let column = 0; column < columns; column++) {
-			initialBoardState[row][column] = '';
-		}
-	}
-
-	return initialBoardState;
-};
-
-const checkRows = (currentBoardState, lengthReqForWin) => {
-	let gameIsWon = false;
-	let winner = null;
-
-	// Loop through our 2d board state array
-	for (let currentRow of currentBoardState) {
-		let inARow = [];
-		for (let XorO of currentRow) {
-			if (XorO === inARow[0] && XorO !== '') {
-				// If current tile is same as previous
-				inARow.push(XorO);
-
-				if (inARow.length === lengthReqForWin && inARow[0] !== '') {
-					// If we've reached a winning state
-					gameIsWon = true;
-
-					if (inARow[0] === 'X') {
-						winner = 'X';
-					} else if (inARow[0] === 'O') {
-						winner = 'O';
-					}
-
-					break;
-				}
-			} else if (XorO !== '') {
-				// Reset our tracking array with new starting value
-				inARow = [XorO];
-			}
-		}
-	}
-
-	return [gameIsWon, winner];
-};
-
-const checkColumns = (currentBoardState, lengthReqForWin) => {
-	let gameIsWon = false;
-	let winner = '';
-	let columnBasedBoardState = [];
-
-	console.log(currentBoardState.entries());
-
-	for (let [index, currentRow] of currentBoardState.entries()) {
-		for (let row of currentRow) {
-		}
-	}
-	// console.log(currentBoardState);
-
-	return [gameIsWon, winner];
-};
-
-const checkDiagonals = (currentBoardState, lengthReqForWin) => {
-	let gameIsWon = false;
-	let winner = '';
-	return [gameIsWon, winner];
-};
-
 const App = () => {
 	const [rows, setRows] = useState(5);
 	const [columns, setColumns] = useState(5);
@@ -159,13 +95,16 @@ const App = () => {
 	const [boardState, setBoardState] = useState(
 		createInitialBoardState(rows, columns)
 	);
-	const [turnCounter, setTurnCounter] = useState(1);
+	const [firstTurn, setFirstTurn] = useState(1);
+	const [turnCounter, setTurnCounter] = useState(firstTurn);
 	const [gameComplete, setGameComplete] = useState(false);
 
 	const resetBoardState = useCallback(() => {
 		setBoardState(createInitialBoardState(rows, columns));
 		setGameComplete(false);
-	}, [rows, columns]);
+		setTurnCounter(firstTurn + 1);
+		setFirstTurn((currentValue) => currentValue + 1);
+	}, [rows, columns, firstTurn]);
 
 	const updateBoardState = useCallback((row, column, XorO) => {
 		setBoardState((currentBoardState) => {
@@ -178,10 +117,17 @@ const App = () => {
 	}, []);
 
 	const checkForWinner = useCallback(() => {
-		const [rowWin, rowWinner] = checkRows(boardState, lengthReqForWin);
-		const [columnWin, columnWinner] = checkColumns(boardState, lengthReqForWin);
+		const [rowWin, rowWinner] = checkBoardState(boardState, lengthReqForWin);
+		const [columnWin, columnWinner] = checkColumns(
+			boardState,
+			columns,
+			rows,
+			lengthReqForWin
+		);
 		const [diagonalWin, diagonalWinner] = checkDiagonals(
 			boardState,
+			columns,
+			rows,
 			lengthReqForWin
 		);
 
@@ -191,7 +137,7 @@ const App = () => {
 				`We have a winner!!! ${rowWinner ?? columnWinner ?? diagonalWinner}`
 			);
 		}
-	}, [boardState, lengthReqForWin]);
+	}, [boardState, columns, lengthReqForWin, rows]);
 
 	useEffect(() => {
 		checkForWinner();

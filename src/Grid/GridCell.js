@@ -52,11 +52,20 @@ const GridCell = ({
 	const [isHovered, setIsHovered] = useState(false);
 	const [XorO, setXorO] = useState('X');
 
-	const cellSelected = useCallback(() => {
-		if (occupied === false && gameComplete === false) {
-			setSelected(row, column, XorO);
-		}
-	}, [XorO, column, gameComplete, occupied, row, setSelected]);
+	const cellSelected = useCallback(
+		(event) => {
+			if (
+				event.type === 'click' ||
+				event.code === 'Enter' ||
+				event.code === 'Space'
+			) {
+				if (occupied === false && gameComplete === false) {
+					setSelected(row, column, XorO);
+				}
+			}
+		},
+		[XorO, column, gameComplete, occupied, row, setSelected]
+	);
 
 	const hoverCell = useCallback((event) => {
 		if (event.type === 'mouseenter') {
@@ -74,8 +83,10 @@ const GridCell = ({
 		<StyledGridCell>
 			<HoverArea
 				onClick={cellSelected}
+				onKeyPress={cellSelected}
 				onMouseEnter={hoverCell}
 				onMouseLeave={hoverCell}
+				tabIndex='0'
 			/>
 			{(output === 'X' && <X />) ||
 				(output === 'O' && <O />) ||
