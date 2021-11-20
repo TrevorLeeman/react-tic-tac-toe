@@ -5,7 +5,7 @@ const StyledButton = styled.button`
 	top: 0;
 	display: inline-block;
 	border: 0;
-	padding: 2rem 3rem;
+	padding: 1rem 2rem;
 	border-radius: 1rem;
 	cursor: pointer;
 
@@ -24,6 +24,10 @@ const StyledButton = styled.button`
 		top: 1rem;
 		box-shadow: 0 2px 0px #553795;
 		transition: all 0.2s;
+	}
+
+	@media (min-height: 800px) {
+		padding: 2rem 3rem;
 	}
 `;
 

@@ -9,8 +9,8 @@ const StyledSocialCard = styled.footer`
 		list-style: none;
 
 		li {
-			width: 5rem;
-			width: 5rem;
+			width: 4rem;
+			width: 4rem;
 			transition: all 0.5s ease;
 
 			&:hover {
@@ -19,6 +19,11 @@ const StyledSocialCard = styled.footer`
 
 			svg {
 				width: 100%;
+			}
+
+			@media (min-width: 800px) and (min-height: 800px) {
+				width: 5rem;
+				width: 5rem;
 			}
 		}
 	}
