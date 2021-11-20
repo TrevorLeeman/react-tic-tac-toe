@@ -5,6 +5,8 @@ const StyledFooter = styled.footer`
 	align-items: center;
 	justify-content: center;
 	justify-self: flex-end;
+	position: sticky;
+	top: 100vh;
 
 	p {
 		background-color: #000000cc;
