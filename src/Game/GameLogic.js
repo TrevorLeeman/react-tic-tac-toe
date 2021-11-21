@@ -14,16 +14,13 @@ export const createInitialBoardState = (rows, columns) => {
 
 export const createDiagonalBoardState = (rows, columns) => {
 	// Initialize 2d boardState array
-	let diagonalBoardState = [];
+	let diagonals = [];
 
-	for (let row = 0; row < rows; row++) {
-		diagonalBoardState[row] = [];
-		for (let column = 0; column < columns; column++) {
-			diagonalBoardState[row][column] = '';
-		}
+	for (let i = 0; i < rows + columns - 1; i++) {
+		diagonals.push([]);
 	}
 
-	return diagonalBoardState;
+	return diagonals;
 };
 
 export const checkBoardState = (currentBoardState, lengthReqForWin) => {
@@ -74,9 +71,9 @@ export const checkColumns = (
 		}
 	}
 
-	const winOrNaw = checkBoardState(columnBasedBoardState, lengthReqForWin);
+	const columnWin = checkBoardState(columnBasedBoardState, lengthReqForWin);
 
-	return winOrNaw;
+	return columnWin;
 };
 
 export const checkDiagonals = (
@@ -85,13 +82,23 @@ export const checkDiagonals = (
 	columnLen,
 	lengthReqForWin
 ) => {
-	let gameIsWon = false;
-	let winner = '';
-	let diagonalBasedBoardState = createDiagonalBoardState(rowLen, columnLen);
+	let downLeftDiagonalBoardState = createDiagonalBoardState(rowLen, columnLen);
+	let downRightDiagonalBoardState = createDiagonalBoardState(rowLen, columnLen);
 
-	// Convert 2d row array to 2d diagonal array
+	// Convert 2d row array to 2d diagonal arrays
+	for (let [i, currentRow] of currentBoardState.entries()) {
+		for (let [j, XorO] of currentRow.entries()) {
+			downLeftDiagonalBoardState[i + j].push(XorO);
+			downRightDiagonalBoardState[i - j + rowLen - 1].push(XorO);
+		}
+	}
 
-	// [['']['','']['','','']['','','','']['','','','','']]
+	const bothDiagonals = [
+		...downLeftDiagonalBoardState,
+		...downRightDiagonalBoardState,
+	];
 
-	return [gameIsWon, winner];
+	const diagonalWin = checkBoardState(bothDiagonals, lengthReqForWin);
+
+	return diagonalWin;
 };

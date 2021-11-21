@@ -17,7 +17,7 @@ const StyledHeader = styled.header`
 	@media (min-width: 420px) {
 		padding: 1rem;
 		min-height: unset;
-	} ;
+	}
 `;
 
 const StyledAppTitle = styled.h1`

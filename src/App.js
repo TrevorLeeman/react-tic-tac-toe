@@ -104,7 +104,7 @@ const App = () => {
 		setFirstTurn((currentValue) => currentValue + 1);
 	}, [rows, columns, firstTurn]);
 
-	const updateBoardState = useCallback((row, column, XorO) => {
+	const updateBoardState = (row, column, XorO) => {
 		setBoardState((currentBoardState) => {
 			let newBoardState = [...currentBoardState];
 			newBoardState[row][column] = XorO;
@@ -112,7 +112,7 @@ const App = () => {
 		});
 
 		setTurnCounter((currentTurnCount) => currentTurnCount + 1);
-	}, []);
+	};
 
 	const checkForWinner = useCallback(() => {
 		const [rowWin, rowWinner] = checkBoardState(boardState, lengthReqForWin);

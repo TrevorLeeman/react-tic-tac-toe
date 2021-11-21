@@ -32,7 +32,7 @@ const StyledGrid = styled.div`
 	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
 	grid-gap: 0.8rem;
 
-	animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+	/* animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; */
 
 	@media (min-width: 800px) and (min-height: 800px) {
 		grid-gap: 1.25rem;
