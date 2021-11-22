@@ -25,10 +25,6 @@ const StyledButton = styled.button`
 		box-shadow: 0 2px 0px #553795;
 		transition: all 0.2s;
 	}
-
-	@media (min-height: 800px) {
-		padding: 2rem 3rem;
-	}
 `;
 
 const Button = ({ children, className, clickHandler }) => {

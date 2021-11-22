@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './UI/Header';
 import Button from './UI/Button';
+import GearIcon from './UI/Icons/GearIcon';
 import Grid from './Grid/Grid';
 import Footer from './UI/Footer';
 import {
@@ -82,8 +83,16 @@ const StyledApp = styled.div`
 	padding: 2rem 0;
 `;
 
-const StyledButton = styled(Button)`
+const StyledResetButton = styled(Button)`
 	margin-bottom: 2rem;
+
+	@media (min-height: 800px) {
+		padding: 2rem 3rem;
+	}
+`;
+
+const StyledSettingsButton = styled(Button)`
+	padding: 0.5rem 1rem 0;
 `;
 
 const App = () => {
@@ -147,9 +156,12 @@ const App = () => {
 			<AppContainer>
 				<Header title='React-Tac-Toe' />
 				<StyledApp>
-					<StyledButton clickHandler={resetBoardState}>
+					<StyledResetButton clickHandler={resetBoardState}>
 						{gameComplete ? 'New Game' : 'Reset Game'}
-					</StyledButton>
+					</StyledResetButton>
+					<StyledSettingsButton>
+						<GearIcon />
+					</StyledSettingsButton>
 					<Grid
 						rows={rows}
 						columns={columns}
