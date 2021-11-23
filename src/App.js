@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './UI/Header';
-import Button from './UI/Button';
-import GearIcon from './UI/Icons/GearIcon';
+import Controls from './UI/Menu';
 import Grid from './Grid/Grid';
 import Footer from './UI/Footer';
+import Modal from './UI/Modal';
 import {
 	createInitialBoardState,
 	checkBoardState,
@@ -40,6 +40,7 @@ const AppContainer = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	min-width: 300px;
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
@@ -76,44 +77,53 @@ const AppContainer = styled.div`
 `;
 
 const StyledApp = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: fit-content 1fr;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		'controls'
+		'grid';
+	gap: 2rem;
+	place-items: center;
 	padding: 2rem 0;
-`;
 
-const StyledResetButton = styled(Button)`
-	margin-bottom: 2rem;
-
-	@media (min-height: 800px) {
-		padding: 2rem 3rem;
+	@media (min-width: 400px) {
+		padding: 2rem;
 	}
-`;
 
-const StyledSettingsButton = styled(Button)`
-	padding: 0.5rem 1rem 0;
+	@media (min-width: 1440px) {
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-areas: 'controls grid .';
+	}
 `;
 
 const App = () => {
 	const [rows, setRows] = useState(5);
 	const [columns, setColumns] = useState(5);
-	const [lengthReqForWin, setLengthReqForWin] = useState(4);
+	const [lengthReqForWin, setLengthReqForWin] = useState(3);
 	const [boardState, setBoardState] = useState(
 		createInitialBoardState(rows, columns)
 	);
 	const [firstTurn, setFirstTurn] = useState(1);
 	const [turnCounter, setTurnCounter] = useState(firstTurn);
 	const [gameComplete, setGameComplete] = useState(false);
+	const [modalActive, setModalActive] = useState(false);
+	const [winCounts, setWinCounts] = useState([0, 0]);
 
-	const resetBoardState = useCallback(() => {
-		setBoardState(createInitialBoardState(rows, columns));
-		setGameComplete(false);
-		setTurnCounter(firstTurn + 1);
-		setFirstTurn((currentValue) => currentValue + 1);
-	}, [rows, columns, firstTurn]);
+	const resetBoardState = useCallback(
+		(event, numRows = rows, numColumns = columns) => {
+			console.log(numRows);
+			console.log(numColumns);
+			setBoardState(createInitialBoardState(numRows, numColumns));
+			setGameComplete(false);
+			setTurnCounter(firstTurn + 1);
+			setFirstTurn((currentValue) => currentValue + 1);
+		},
+		[columns, firstTurn, rows]
+	);
 
-	const updateBoardState = (row, column, XorO) => {
+	const updateBoardState = useCallback((row, column, XorO) => {
 		setBoardState((currentBoardState) => {
 			let newBoardState = [...currentBoardState];
 			newBoardState[row][column] = XorO;
@@ -121,9 +131,23 @@ const App = () => {
 		});
 
 		setTurnCounter((currentTurnCount) => currentTurnCount + 1);
-	};
+	}, []);
 
-	const checkForWinner = useCallback(() => {
+	const toggleModal = useCallback(() => {
+		return modalActive ? setModalActive(false) : setModalActive(true);
+	}, [modalActive]);
+
+	const updateBoardSize = useCallback(
+		(numRows, numColumns) => {
+			setRows(numRows);
+			setColumns(numColumns);
+			resetBoardState(null, numRows, numColumns);
+		},
+		[resetBoardState]
+	);
+
+	// Check for winner when board state changes
+	useEffect(() => {
 		const [rowWin, rowWinner] = checkBoardState(boardState, lengthReqForWin);
 		const [columnWin, columnWinner] = checkColumns(
 			boardState,
@@ -146,22 +170,17 @@ const App = () => {
 		}
 	}, [boardState, columns, lengthReqForWin, rows]);
 
-	useEffect(() => {
-		checkForWinner();
-	}, [checkForWinner]);
-
 	return (
 		<>
 			<CssReset />
 			<AppContainer>
 				<Header title='React-Tac-Toe' />
 				<StyledApp>
-					<StyledResetButton clickHandler={resetBoardState}>
-						{gameComplete ? 'New Game' : 'Reset Game'}
-					</StyledResetButton>
-					<StyledSettingsButton>
-						<GearIcon />
-					</StyledSettingsButton>
+					<Controls
+						gameComplete={gameComplete}
+						resetBoardState={resetBoardState}
+						showSettings={toggleModal}
+					/>
 					<Grid
 						rows={rows}
 						columns={columns}
@@ -172,6 +191,9 @@ const App = () => {
 					/>
 				</StyledApp>
 				<Footer />
+				{modalActive && (
+					<Modal closeSettings={toggleModal} setBoardSize={updateBoardSize} />
+				)}
 			</AppContainer>
 		</>
 	);

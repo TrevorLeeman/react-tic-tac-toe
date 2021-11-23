@@ -13,8 +13,10 @@ const flipAnimation = keyframes`
 `;
 
 const StyledGrid = styled.div`
-	width: 80vw;
-	height: 80vw;
+	grid-area: grid;
+
+	min-width: 300px;
+	min-height: 300px;
 	max-width: 70vh;
 	max-height: 70vh;
 
@@ -34,9 +36,16 @@ const StyledGrid = styled.div`
 
 	/* animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; */
 
+	@media (min-width: 300px) {
+		width: 90vw;
+		height: 90vw;
+	}
+
 	@media (min-width: 800px) and (min-height: 800px) {
 		grid-gap: 1.25rem;
 		padding: 2rem;
+		width: 80vw;
+		height: 80vw;
 	}
 `;
 

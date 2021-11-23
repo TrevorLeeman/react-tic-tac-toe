@@ -17,8 +17,16 @@ const StyledButton = styled.button`
 	font-family: 'Saira Condensed', sans-serif;
 	font-weight: 700;
 	letter-spacing: 2pt;
+	white-space: nowrap;
+	margin-bottom: 1rem;
 
 	transition: all 0.2s;
+
+	&:hover {
+		top: 0.1rem;
+		box-shadow: 0 0.9rem 0px #553795;
+		transition: all 0.2s;
+	}
 
 	&:active {
 		top: 1rem;

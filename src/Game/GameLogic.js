@@ -32,23 +32,20 @@ export const checkBoardState = (currentBoardState, lengthReqForWin) => {
 		let inARow = 0;
 		let XorO = '';
 		for (let tileValue of currentRow) {
-			if (tileValue !== '') {
-				// Skip blank tiles
-				if (tileValue === XorO) {
-					// If current tile is same as previous
-					inARow++;
+			if (tileValue === XorO && tileValue !== '') {
+				// If current tile is same as previous
+				inARow++;
 
-					if (inARow === lengthReqForWin) {
-						// If we've reached a winning state
-						gameIsWon = true;
-						winner = XorO;
-						break;
-					}
-				} else {
-					// Reset our tracking array with new starting value
-					inARow = 1;
-					XorO = tileValue;
+				if (inARow === lengthReqForWin) {
+					// If we've reached a winning state
+					gameIsWon = true;
+					winner = XorO;
+					break;
 				}
+			} else {
+				// Reset our tracking array with new starting value
+				inARow = 1;
+				XorO = tileValue;
 			}
 		}
 	}
@@ -63,6 +60,8 @@ export const checkColumns = (
 	lengthReqForWin
 ) => {
 	let columnBasedBoardState = createInitialBoardState(rowLen, columnLen);
+	console.log(currentBoardState);
+	console.log(columnBasedBoardState);
 
 	// Convert 2d row array to 2d column array
 	for (let [i, currentRow] of currentBoardState.entries()) {
@@ -96,7 +95,7 @@ export const checkDiagonals = (
 	const bothDiagonals = [
 		...downLeftDiagonalBoardState,
 		...downRightDiagonalBoardState,
-	];
+	].filter((diagonalArr) => diagonalArr.length >= lengthReqForWin);
 
 	const diagonalWin = checkBoardState(bothDiagonals, lengthReqForWin);
 
