@@ -187,7 +187,11 @@ const App = () => {
 			setGameComplete(true);
 			if (rowWinner === 'X' || columnWinner === 'X' || diagonalWinner === 'X') {
 				setPlayer1WinCount((currentWinCount) => currentWinCount + 1);
-			} else {
+			} else if (
+				rowWinner === 'O' ||
+				columnWinner === 'O' ||
+				diagonalWinner === 'O'
+			) {
 				setPlayer2WinCount((currentWinCount) => currentWinCount + 1);
 			}
 		}
