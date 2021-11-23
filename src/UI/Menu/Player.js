@@ -23,7 +23,7 @@ const checkInputLength = (event) => {
 	}
 };
 
-const Player = ({ name }) => {
+const Player = ({ name, score }) => {
 	const [playerName, setPlayerName] = useState(name);
 
 	const updatePlayerName = (event) => {
@@ -40,7 +40,7 @@ const Player = ({ name }) => {
 			>
 				{playerName}
 			</h2>
-			<Score>0</Score>
+			<Score>{score}</Score>
 		</StyledPlayer>
 	);
 };

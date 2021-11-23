@@ -9,7 +9,7 @@ const StyledButton = styled.button`
 	border-radius: 1rem;
 	cursor: pointer;
 
-	background: #7051b8;
+	background-color: #7051b8;
 	color: white;
 	box-shadow: 0 1rem 0 #553795;
 

@@ -60,8 +60,6 @@ export const checkColumns = (
 	lengthReqForWin
 ) => {
 	let columnBasedBoardState = createInitialBoardState(rowLen, columnLen);
-	console.log(currentBoardState);
-	console.log(columnBasedBoardState);
 
 	// Convert 2d row array to 2d column array
 	for (let [i, currentRow] of currentBoardState.entries()) {

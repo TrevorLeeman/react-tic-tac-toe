@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import GameSettings from './GameSettings';
-import Button from './Button';
+import CloseIcon from '../Icons/CloseIcon';
 
 const ModalBackground = styled.div`
 	z-index: 998;
@@ -22,22 +22,35 @@ const PositionModal = styled.div`
 
 const StyledModal = styled.div`
 	display: flex;
-	background-color: white;
+	flex-direction: column;
 	padding: 1rem;
 	border-radius: 1rem;
+	max-width: 90vw;
+	background-color: white;
+	overflow: auto;
+	font-size: 2rem;
+	max-height: 70vh;
 `;
 
-const Modal = ({ closeSettings, setBoardSize }) => {
-	const updateBoardSize = (numRows, numColumns) => {
-		setBoardSize(numRows, numColumns);
-	};
+const TitleCloseWrap = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
 
+const Modal = ({ closeSettings, setBoardSize, setConsecutiveToWin }) => {
 	return (
 		<>
 			<PositionModal>
 				<StyledModal>
-					<GameSettings setBoardSize={updateBoardSize} />
-					<Button clickHandler={closeSettings}>Close</Button>
+					<TitleCloseWrap>
+						<h2>Select Mode</h2>
+						<CloseIcon clickHandler={closeSettings} />
+					</TitleCloseWrap>
+					<GameSettings
+						setBoardSize={setBoardSize}
+						setNumToWin={setConsecutiveToWin}
+						closeModal={closeSettings}
+					/>
 				</StyledModal>
 			</PositionModal>
 			<ModalBackground onClick={closeSettings} />

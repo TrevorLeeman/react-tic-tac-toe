@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PlayerInfo from './PlayerInfo';
-import Button from './Button';
-import GearIcon from './Icons/GearIcon';
+import Button from '../Button';
+import GearIcon from '../Icons/GearIcon';
 
 const PlayerInfoControlsWrapper = styled.aside`
 	grid-area: controls;
@@ -45,10 +45,16 @@ const StyledSettingsButton = styled(Button)`
 	height: fit-content;
 `;
 
-const Menu = ({ gameComplete, resetBoardState, showSettings }) => {
+const Menu = ({
+	gameComplete,
+	resetBoardState,
+	showSettings,
+	player1Wins,
+	player2Wins,
+}) => {
 	return (
 		<PlayerInfoControlsWrapper>
-			<PlayerInfo />
+			<PlayerInfo player1Wins={player1Wins} player2Wins={player2Wins} />
 			<Controls>
 				<StyledResetButton clickHandler={resetBoardState}>
 					{gameComplete ? 'New Game' : 'Reset Game'}

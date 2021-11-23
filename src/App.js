@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './UI/Header';
-import Controls from './UI/Menu';
+import Menu from './UI/Menu/Menu';
 import Grid from './Grid/Grid';
 import Footer from './UI/Footer';
-import Modal from './UI/Modal';
+import Modal from './UI/Modal/Modal';
 import {
 	createInitialBoardState,
 	checkBoardState,
@@ -99,8 +99,8 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-	const [rows, setRows] = useState(5);
-	const [columns, setColumns] = useState(5);
+	const [rows, setRows] = useState(3);
+	const [columns, setColumns] = useState(3);
 	const [lengthReqForWin, setLengthReqForWin] = useState(3);
 	const [boardState, setBoardState] = useState(
 		createInitialBoardState(rows, columns)
@@ -109,12 +109,11 @@ const App = () => {
 	const [turnCounter, setTurnCounter] = useState(firstTurn);
 	const [gameComplete, setGameComplete] = useState(false);
 	const [modalActive, setModalActive] = useState(false);
-	const [winCounts, setWinCounts] = useState([0, 0]);
+	const [player1WinCount, setPlayer1WinCount] = useState(0);
+	const [player2WinCount, setPlayer2WinCount] = useState(0);
 
 	const resetBoardState = useCallback(
 		(event, numRows = rows, numColumns = columns) => {
-			console.log(numRows);
-			console.log(numColumns);
 			setBoardState(createInitialBoardState(numRows, numColumns));
 			setGameComplete(false);
 			setTurnCounter(firstTurn + 1);
@@ -164,9 +163,11 @@ const App = () => {
 
 		if (rowWin || columnWin || diagonalWin) {
 			setGameComplete(true);
-			console.log(
-				`We have a winner!!! ${rowWinner ?? columnWinner ?? diagonalWinner}`
-			);
+			if (rowWinner === 'X' || columnWinner === 'X' || diagonalWinner === 'X') {
+				setPlayer1WinCount((currentWinCount) => currentWinCount + 1);
+			} else {
+				setPlayer2WinCount((currentWinCount) => currentWinCount + 1);
+			}
 		}
 	}, [boardState, columns, lengthReqForWin, rows]);
 
@@ -176,10 +177,12 @@ const App = () => {
 			<AppContainer>
 				<Header title='React-Tac-Toe' />
 				<StyledApp>
-					<Controls
+					<Menu
 						gameComplete={gameComplete}
 						resetBoardState={resetBoardState}
 						showSettings={toggleModal}
+						player1Wins={player1WinCount}
+						player2Wins={player2WinCount}
 					/>
 					<Grid
 						rows={rows}
@@ -192,7 +195,11 @@ const App = () => {
 				</StyledApp>
 				<Footer />
 				{modalActive && (
-					<Modal closeSettings={toggleModal} setBoardSize={updateBoardSize} />
+					<Modal
+						closeSettings={toggleModal}
+						setBoardSize={updateBoardSize}
+						setConsecutiveToWin={setLengthReqForWin}
+					/>
 				)}
 			</AppContainer>
 		</>
