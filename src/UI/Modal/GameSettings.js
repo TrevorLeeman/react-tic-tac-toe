@@ -8,7 +8,7 @@ const GameSettingsWrapper = styled.form`
 	gap: 2rem;
 	overflow: auto;
 	width: 100%;
-	scroll-snap-type: both mandatory;
+	scroll-snap-type: x mandatory;
 
 	@media (min-width: 800px) and (max-width: 1440px) {
 		grid-template-columns: 1fr;

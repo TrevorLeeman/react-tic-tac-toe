@@ -30,6 +30,10 @@ const StyledModal = styled.div`
 	overflow: auto;
 	font-size: 2rem;
 	max-height: 70vh;
+
+	@media (min-width: 1440px) {
+		padding: 2rem;
+	}
 `;
 
 const TitleCloseWrap = styled.div`
