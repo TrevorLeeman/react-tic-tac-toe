@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/react-tic-tac-toe/static/js/main.4073f64b.chunk.js",
-    "main.js.map": "/react-tic-tac-toe/static/js/main.4073f64b.chunk.js.map",
+    "main.js": "/react-tic-tac-toe/static/js/main.1aadb521.chunk.js",
+    "main.js.map": "/react-tic-tac-toe/static/js/main.1aadb521.chunk.js.map",
     "runtime-main.js": "/react-tic-tac-toe/static/js/runtime-main.3cd9d4a2.js",
     "runtime-main.js.map": "/react-tic-tac-toe/static/js/runtime-main.3cd9d4a2.js.map",
     "static/js/2.d510599e.chunk.js": "/react-tic-tac-toe/static/js/2.d510599e.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.3cd9d4a2.js",
     "static/js/2.d510599e.chunk.js",
-    "static/js/main.4073f64b.chunk.js"
+    "static/js/main.1aadb521.chunk.js"
   ]
 }
