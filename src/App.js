@@ -113,11 +113,22 @@ const App = () => {
 	const [player2WinCount, setPlayer2WinCount] = useState(0);
 
 	const resetBoardState = useCallback(
-		(event, numRows = rows, numColumns = columns) => {
+		(
+			event,
+			numRows = rows,
+			numColumns = columns,
+			incrementFirstTurn = false
+		) => {
 			setBoardState(createInitialBoardState(numRows, numColumns));
 			setGameComplete(false);
-			setTurnCounter(firstTurn + 1);
-			setFirstTurn((currentValue) => currentValue + 1);
+
+			// Pass in true if you want to increment first turn while reseting board
+			if (incrementFirstTurn) {
+				setTurnCounter(firstTurn + 1);
+				setFirstTurn((currentValue) => currentValue + 1);
+			} else {
+				setTurnCounter(firstTurn);
+			}
 		},
 		[columns, firstTurn, rows]
 	);
@@ -140,9 +151,15 @@ const App = () => {
 		(numRows, numColumns) => {
 			setRows(numRows);
 			setColumns(numColumns);
-			resetBoardState(null, numRows, numColumns);
+
+			// Increment first turn only if game is complete
+			if (gameComplete) {
+				resetBoardState(null, numRows, numColumns, true);
+			} else {
+				resetBoardState(null, numRows, numColumns, false);
+			}
 		},
-		[resetBoardState]
+		[gameComplete, resetBoardState]
 	);
 
 	// Check for winner when board state changes
@@ -161,7 +178,12 @@ const App = () => {
 			lengthReqForWin
 		);
 
-		if (rowWin || columnWin || diagonalWin) {
+		if (
+			rowWin ||
+			columnWin ||
+			diagonalWin ||
+			turnCounter - firstTurn === rows * columns
+		) {
 			setGameComplete(true);
 			if (rowWinner === 'X' || columnWinner === 'X' || diagonalWinner === 'X') {
 				setPlayer1WinCount((currentWinCount) => currentWinCount + 1);
@@ -169,7 +191,7 @@ const App = () => {
 				setPlayer2WinCount((currentWinCount) => currentWinCount + 1);
 			}
 		}
-	}, [boardState, columns, lengthReqForWin, rows]);
+	}, [boardState, columns, firstTurn, lengthReqForWin, rows, turnCounter]);
 
 	return (
 		<>

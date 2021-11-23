@@ -4,11 +4,16 @@ import MiniGrid from './MiniGrid/MiniGrid';
 const GameSettingsWrapper = styled.form`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	padding: 2rem 2rem 3rem;
+	padding: 1rem 1rem 2rem;
 	gap: 2rem;
 	overflow: auto;
 	width: 100%;
 	scroll-snap-type: x mandatory;
+	user-select: none;
+
+	@media (min-width: 400px) {
+		padding: 2rem 2rem 3rem;
+	}
 
 	@media (min-width: 800px) and (max-width: 1440px) {
 		grid-template-columns: 1fr;
@@ -27,6 +32,14 @@ const ModeWrapper = styled.div`
 		&:hover {
 			transform: scale(1.1);
 			transition: 0.1s ease-in;
+
+			.styledGrid {
+				box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
+					0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+					inset 0 4px 5px 0 rgba(255, 255, 255, 0.14),
+					inset 0 1px 10px 0 rgba(255, 255, 255, 0.12),
+					inset 0 2px 4px -1px rgba(255, 255, 255, 0.2);
+			}
 		}
 	}
 `;

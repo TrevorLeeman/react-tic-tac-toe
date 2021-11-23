@@ -31,6 +31,12 @@ const StyledModal = styled.div`
 	font-size: 2rem;
 	max-height: 70vh;
 
+	box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
+		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+		inset 0 4px 5px 0 rgba(255, 255, 255, 0.14),
+		inset 0 1px 10px 0 rgba(255, 255, 255, 0.12),
+		inset 0 2px 4px -1px rgba(255, 255, 255, 0.2);
+
 	@media (min-width: 1440px) {
 		padding: 2rem;
 	}
@@ -39,6 +45,11 @@ const StyledModal = styled.div`
 const TitleCloseWrap = styled.div`
 	display: flex;
 	justify-content: space-between;
+	padding-left: 1rem;
+
+	@media (min-width: 400px) {
+		padding-left: 2rem;
+	}
 `;
 
 const Modal = ({ closeSettings, setBoardSize, setConsecutiveToWin }) => {

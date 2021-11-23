@@ -3,8 +3,8 @@ import Player from './Player';
 
 const PlayerInfoWrapper = styled.div`
 	display: flex;
-	width: 100%;
 	justify-content: space-around;
+	width: 100%;
 	background-color: #ffffffbf;
 	padding: 1rem;
 	border-radius: 1rem 1rem 0 0;
