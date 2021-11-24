@@ -117,7 +117,7 @@ const App = () => {
 			event,
 			numRows = rows,
 			numColumns = columns,
-			incrementFirstTurn = false
+			incrementFirstTurn = gameComplete ? true : false
 		) => {
 			setBoardState(createInitialBoardState(numRows, numColumns));
 			setGameComplete(false);
@@ -130,7 +130,7 @@ const App = () => {
 				setTurnCounter(firstTurn);
 			}
 		},
-		[columns, firstTurn, rows]
+		[columns, firstTurn, gameComplete, rows]
 	);
 
 	const updateBoardState = useCallback((row, column, XorO) => {
@@ -151,15 +151,9 @@ const App = () => {
 		(numRows, numColumns) => {
 			setRows(numRows);
 			setColumns(numColumns);
-
-			// Increment first turn only if game is complete
-			if (gameComplete) {
-				resetBoardState(null, numRows, numColumns, true);
-			} else {
-				resetBoardState(null, numRows, numColumns, false);
-			}
+			resetBoardState(null, numRows, numColumns);
 		},
-		[gameComplete, resetBoardState]
+		[resetBoardState]
 	);
 
 	// Check for winner when board state changes
