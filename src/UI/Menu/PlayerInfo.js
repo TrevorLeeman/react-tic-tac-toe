@@ -5,7 +5,7 @@ const PlayerInfoWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
-	background-color: #ffffffbf;
+	background-color: #f2f2f2;
 	padding: 1rem;
 	border-radius: 1rem 1rem 0 0;
 `;
