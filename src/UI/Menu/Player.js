@@ -12,7 +12,7 @@ const StyledPlayer = styled.div`
 
 const StyledPlayerName = styled.h2`
 	text-decoration: solid underline transparent 0.3rem;
-	transition: all 300ms ease-in;
+	transition: all 300ms ease-out;
 
 	${(props) => props.turnActive && 'text-decoration-color: #7051b8'}
 `;
