@@ -26,7 +26,7 @@ const StyledModal = styled.div`
 	padding: 1rem;
 	border-radius: 1rem;
 	max-width: 90vw;
-	background-color: white;
+	background-color: #f7f7f7;
 	overflow: auto;
 	font-size: 2rem;
 	max-height: 70vh;

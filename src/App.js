@@ -45,35 +45,88 @@ const AppContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	background: linear-gradient(
-		270deg,
-		#f94144,
-		#f3722c,
-		#f8961e,
-		#f9844a,
-		#f9c74f,
-		#90be6d,
-		#43aa8b,
-		#4d908e,
-		#577590,
-		#277da1
-	);
+	animation: 100s infinite rotateBackground;
 
-	background-size: 1000% 1000%;
-
-	animation: animatedGradient 20s ease infinite;
-
-	@keyframes animatedGradient {
-		0% {
-			background-position: 0% 50%;
+	@keyframes rotateBackground {
+		from {
+			transform: rotate(0deg);
 		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
+		to {
+			transform: rotate(360deg);
 		}
 	}
+
+	/* &::before {
+		position: absolute;
+		top: 0;
+		left: 0px;
+		width: 500px;
+		height: 500px;
+		background-image: linear-gradient(
+				201deg,
+				rgba(148, 148, 148, 0.07) 0%,
+				rgba(148, 148, 148, 0.07) 50%,
+				rgba(83, 83, 83, 0.07) 50%,
+				rgba(83, 83, 83, 0.07) 100%
+			),
+			linear-gradient(
+				192deg,
+				rgba(176, 176, 176, 0.08) 0%,
+				rgba(176, 176, 176, 0.08) 50%,
+				rgba(180, 180, 180, 0.08) 50%,
+				rgba(180, 180, 180, 0.08) 100%
+			),
+			linear-gradient(
+				48deg,
+				rgba(185, 185, 185, 0.1) 0%,
+				rgba(185, 185, 185, 0.1) 50%,
+				rgba(243, 243, 243, 0.1) 50%,
+				rgba(243, 243, 243, 0.1) 100%
+			),
+			linear-gradient(
+				65deg,
+				rgba(172, 172, 172, 0.09) 0%,
+				rgba(172, 172, 172, 0.09) 50%,
+				rgba(209, 209, 209, 0.09) 50%,
+				rgba(209, 209, 209, 0.09) 100%
+			),
+			linear-gradient(
+				4deg,
+				rgba(224, 224, 224, 0.03) 0%,
+				rgba(224, 224, 224, 0.03) 50%,
+				rgba(49, 49, 49, 0.03) 50%,
+				rgba(49, 49, 49, 0.03) 100%
+			),
+			linear-gradient(
+				228deg,
+				rgba(152, 152, 152, 0.03) 0%,
+				rgba(152, 152, 152, 0.03) 50%,
+				rgba(130, 130, 130, 0.03) 50%,
+				rgba(130, 130, 130, 0.03) 100%
+			),
+			linear-gradient(
+				163deg,
+				rgba(170, 170, 170, 0.08) 0%,
+				rgba(170, 170, 170, 0.08) 50%,
+				rgba(232, 232, 232, 0.08) 50%,
+				rgba(232, 232, 232, 0.08) 100%
+			),
+			linear-gradient(
+				152deg,
+				rgba(12, 12, 12, 0.05) 0%,
+				rgba(12, 12, 12, 0.05) 50%,
+				rgba(161, 161, 161, 0.05) 50%,
+				rgba(161, 161, 161, 0.05) 100%
+			),
+			linear-gradient(
+				302deg,
+				rgba(48, 48, 48, 0.1) 0%,
+				rgba(48, 48, 48, 0.1) 50%,
+				rgba(195, 195, 195, 0.1) 50%,
+				rgba(195, 195, 195, 0.1) 100%
+			),
+			linear-gradient(90deg, rgb(144, 14, 253), rgb(74, 115, 255));
+	} */
 `;
 
 const StyledApp = styled.div`

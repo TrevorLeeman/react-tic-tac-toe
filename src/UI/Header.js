@@ -8,9 +8,8 @@ const StyledHeader = styled.header`
 	flex-wrap: wrap;
 	gap: 1rem;
 	width: 100%;
-	background-color: white;
 	padding: 2rem;
-	background-color: #f2f2f2;
+	background-color: #f7f7f7;
 	box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14),
 		0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.2);
 
