@@ -58,16 +58,16 @@ const GameSettings = ({ setBoardSize, setNumToWin, closeModal }) => {
 				<p>Win: 3 in a row</p>
 				<MiniGrid rows={3} columns={3} />
 			</ModeWrapper>
-			<ModeWrapper onClick={() => updateGridSize(4, 4, 4)}>
-				<h3>4x4</h3>
-				<p>Win: 4 in a row</p>
-				<MiniGrid rows={4} columns={4} />
-			</ModeWrapper>
 			<ModeWrapper onClick={() => updateGridSize(5, 5, 4)}>
 				<h3>5x5</h3>
 				<p>Win: 4 in a row</p>
-
 				<MiniGrid rows={5} columns={5} />
+			</ModeWrapper>
+			<ModeWrapper onClick={() => updateGridSize(7, 7, 5)}>
+				<h3>7x7</h3>
+				<p>Win: 5 in a row</p>
+
+				<MiniGrid rows={7} columns={7} />
 			</ModeWrapper>
 		</GameSettingsWrapper>
 	);
