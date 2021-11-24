@@ -203,6 +203,7 @@ const App = () => {
 						showSettings={toggleModal}
 						player1Wins={player1WinCount}
 						player2Wins={player2WinCount}
+						turnCounter={turnCounter}
 					/>
 					<Grid
 						rows={rows}

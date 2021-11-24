@@ -34,6 +34,8 @@ const StyledGrid = styled.div`
 	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
 	grid-gap: 0.8rem;
 
+	align-self: start;
+
 	/* animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; */
 
 	@media (min-width: 300px) {
