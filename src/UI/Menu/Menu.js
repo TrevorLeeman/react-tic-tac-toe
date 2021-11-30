@@ -65,7 +65,10 @@ const Menu = ({
 				player2Win={player2Win}
 			/>
 			<Controls>
-				<StyledResetButton clickHandler={resetBoardState}>
+				<StyledResetButton
+					clickHandler={resetBoardState}
+					gameComplete={gameComplete}
+				>
 					{gameComplete ? 'New Game' : 'Reset Game'}
 				</StyledResetButton>
 				<StyledSettingsButton clickHandler={showSettings}>

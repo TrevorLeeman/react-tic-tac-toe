@@ -14,7 +14,10 @@ const StyledGrid = styled.div`
 	display: grid;
 	grid-template-rows: ${(props) => `repeat(${props.rows}, 1fr)`};
 	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
-	grid-gap: 0.8rem;
+	grid-gap: ${(props) =>
+		(props.rows === 3 && '0.8rem') ||
+		(props.rows === 5 && '0.6rem') ||
+		(props.rows === 7 && '0.5rem')};
 
 	scroll-snap-align: center;
 
@@ -24,7 +27,6 @@ const StyledGrid = styled.div`
 	}
 
 	@media (min-width: 600px) {
-		grid-gap: 0.5rem;
 		padding: 0.8rem;
 	}
 `;
@@ -34,7 +36,7 @@ const createGridCells = (rows, columns) => {
 
 	for (let row = 0; row < rows; row++) {
 		for (let column = 0; column < columns; column++) {
-			gridCells.push(<GridCell key={[row, column]} />);
+			gridCells.push(<GridCell key={[row, column]} rows={rows} />);
 		}
 	}
 

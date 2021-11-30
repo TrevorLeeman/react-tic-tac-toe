@@ -1,17 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import GridCell from './GridCell';
 
-const flipAnimation = keyframes`
-	0% {
-		-webkit-transform: rotateY(0);
-		transform: rotateY(0);
-	}
-	100% {
-		-webkit-transform: rotateY(180deg);
-		transform: rotateY(180deg);
-	}
-`;
-
 const StyledGrid = styled.div`
 	grid-area: grid;
 
@@ -30,13 +19,15 @@ const StyledGrid = styled.div`
 		inset 0 2px 4px -1px rgba(255, 255, 255, 0.2);
 
 	display: grid;
-	grid-template-rows: ${(props) => `repeat(${props.rows}, 1fr)`};
-	grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
-	grid-gap: 0.8rem;
+	grid-template-rows: ${(props) => `repeat(${props.gridRows}, 1fr)`};
+	grid-template-columns: ${(props) => `repeat(${props.gridColumns}, 1fr)`};
+
+	grid-gap: ${(props) =>
+		(props.gridRows === 3 && '1.2rem') ||
+		(props.gridRows === 5 && '1rem') ||
+		(props.gridRows === 7 && '0.8rem')};
 
 	align-self: start;
-
-	/* animation: ${flipAnimation} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; */
 
 	@media (min-width: 300px) {
 		width: 90vw;
@@ -44,7 +35,6 @@ const StyledGrid = styled.div`
 	}
 
 	@media (min-width: 800px) and (min-height: 800px) {
-		grid-gap: 1.25rem;
 		padding: 2rem;
 		width: 80vw;
 		height: 80vw;
@@ -52,8 +42,8 @@ const StyledGrid = styled.div`
 `;
 
 const createGridCells = (
-	rows,
-	columns,
+	gridRows,
+	gridColumns,
 	boardState,
 	turnCounter,
 	gameComplete,
@@ -61,8 +51,8 @@ const createGridCells = (
 ) => {
 	let gridCells = [];
 
-	for (let row = 0; row < rows; row++) {
-		for (let column = 0; column < columns; column++) {
+	for (let row = 0; row < gridRows; row++) {
+		for (let column = 0; column < gridColumns; column++) {
 			const occupied = boardState[row][column] === '' ? false : true;
 			const output = occupied && boardState[row][column];
 
@@ -76,6 +66,7 @@ const createGridCells = (
 					output={output}
 					gameComplete={gameComplete}
 					setSelected={setSelected}
+					gridRows={gridRows}
 				/>
 			);
 		}
@@ -85,8 +76,8 @@ const createGridCells = (
 };
 
 const Grid = ({
-	rows,
-	columns,
+	gridRows,
+	gridColumns,
 	boardState,
 	turnCounter,
 	gameComplete,
@@ -96,10 +87,10 @@ const Grid = ({
 		updateBoardState(row, column, XorO);
 
 	return (
-		<StyledGrid rows={rows} columns={columns}>
+		<StyledGrid gridRows={gridRows} gridColumns={gridColumns}>
 			{createGridCells(
-				rows,
-				columns,
+				gridRows,
+				gridColumns,
 				boardState,
 				turnCounter,
 				gameComplete,

@@ -44,7 +44,12 @@ const ModeWrapper = styled.div`
 	}
 `;
 
-const GameSettings = ({ setBoardSize, setNumToWin, closeModal }) => {
+const GameSettings = ({
+	setBoardSize,
+	setNumToWin,
+	closeModal,
+	globalRows,
+}) => {
 	const updateGridSize = (numRows, numColumns, numToWin) => {
 		setBoardSize(numRows, numColumns);
 		setNumToWin(numToWin);
@@ -56,18 +61,18 @@ const GameSettings = ({ setBoardSize, setNumToWin, closeModal }) => {
 			<ModeWrapper onClick={() => updateGridSize(3, 3, 3)}>
 				<h3>3x3</h3>
 				<p>Win: 3 in a row</p>
-				<MiniGrid rows={3} columns={3} />
+				<MiniGrid rows={3} columns={3} globalRows={globalRows} />
 			</ModeWrapper>
 			<ModeWrapper onClick={() => updateGridSize(5, 5, 4)}>
 				<h3>5x5</h3>
 				<p>Win: 4 in a row</p>
-				<MiniGrid rows={5} columns={5} />
+				<MiniGrid rows={5} columns={5} globalRows={globalRows} />
 			</ModeWrapper>
 			<ModeWrapper onClick={() => updateGridSize(7, 7, 5)}>
 				<h3>7x7</h3>
 				<p>Win: 5 in a row</p>
 
-				<MiniGrid rows={7} columns={7} />
+				<MiniGrid rows={7} columns={7} globalRows={globalRows} />
 			</ModeWrapper>
 		</GameSettingsWrapper>
 	);

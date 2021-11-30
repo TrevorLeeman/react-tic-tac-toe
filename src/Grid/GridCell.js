@@ -6,7 +6,11 @@ import O from './O';
 const StyledGridCell = styled.div`
 	position: relative;
 	background-color: #000000cc;
-	border-radius: 1rem;
+	border-radius: ${(props) =>
+		(props.gridRows === 3 && '1rem') ||
+		(props.gridRows === 5 && '0.8rem') ||
+		(props.gridRows === 7 && '0.6rem')};
+
 	box-shadow: inset 0 4px 5px 0 rgba(0, 0, 0, 0.14),
 		inset 0 1px 10px 0 rgba(0, 0, 0, 0.12),
 		inset 0 2px 4px -1px rgba(0, 0, 0, 0.2);
@@ -48,6 +52,7 @@ const GridCell = ({
 	output,
 	gameComplete,
 	setSelected,
+	gridRows,
 }) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [XorO, setXorO] = useState('X');
@@ -80,7 +85,7 @@ const GridCell = ({
 	}, [turnCounter]);
 
 	return (
-		<StyledGridCell>
+		<StyledGridCell gridRows={gridRows}>
 			<HoverArea
 				onClick={cellSelected}
 				onKeyPress={cellSelected}
@@ -88,10 +93,14 @@ const GridCell = ({
 				onMouseLeave={hoverCell}
 				tabIndex='0'
 			/>
-			{(output === 'X' && <X />) ||
-				(output === 'O' && <O />) ||
-				(isHovered && XorO === 'X' && gameComplete === false && <HoverX />) ||
-				(isHovered && XorO === 'O' && gameComplete === false && <HoverO />)}
+			{(output === 'X' && <X gridRows={gridRows} />) ||
+				(output === 'O' && <O gridRows={gridRows} />) ||
+				(isHovered && XorO === 'X' && gameComplete === false && (
+					<HoverX gridRows={gridRows} />
+				)) ||
+				(isHovered && XorO === 'O' && gameComplete === false && (
+					<HoverO gridRows={gridRows} />
+				))}
 		</StyledGridCell>
 	);
 };

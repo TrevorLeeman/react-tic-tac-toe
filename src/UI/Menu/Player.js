@@ -8,12 +8,13 @@ const StyledPlayer = styled.div`
 	justify-content: center;
 	width: fit-content;
 	font-size: 1.5rem;
-	padding: 1rem;
-	border: 2px solid transparent;
+	padding: 0.75rem;
+	border-radius: 0.75rem;
+	border: 0.5rem solid transparent;
 	transition: all 200ms ease-out;
 
-	${(props) => props.turnActive && 'border-color: purple; border-radius: 1rem;'}
-	${(props) => props.win && 'background-color: green; border-radius: 1rem;'}
+	${(props) => props.turnActive && `border-color:#7051b8;`}
+	${(props) => props.win && 'border-color: #109648;'}
 `;
 
 const StyledPlayerName = styled.h2``;
@@ -32,7 +33,6 @@ const checkInputLength = (event) => {
 };
 
 const Player = ({ name, score, turnActive, win }) => {
-	console.log(win);
 	const [playerName, setPlayerName] = useState(name);
 
 	const updatePlayerName = (event) => {

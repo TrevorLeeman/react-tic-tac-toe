@@ -20,13 +20,13 @@ const PlayerInfo = ({
 	return (
 		<PlayerInfoWrapper>
 			<Player
-				name='Player 1'
+				name='Player (X)'
 				score={player1Wins}
 				turnActive={turnCounter % 2}
 				win={player1Win}
 			/>
 			<Player
-				name='Player 2'
+				name='Player (O)'
 				score={player2Wins}
 				turnActive={!(turnCounter % 2)}
 				win={player2Win}

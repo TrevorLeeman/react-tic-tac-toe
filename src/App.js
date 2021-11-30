@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import useFirstRender from './CustomHooks/useFirstRender';
 import Header from './UI/Header';
 import Menu from './UI/Menu/Menu';
 import Grid from './Grid/Grid';
@@ -150,8 +149,6 @@ const App = () => {
 	const [player1WinCount, setPlayer1WinCount] = useState(0);
 	const [player2WinCount, setPlayer2WinCount] = useState(0);
 
-	const firstRender = useFirstRender();
-
 	const resetBoardState = useCallback(
 		(
 			event,
@@ -161,15 +158,8 @@ const App = () => {
 		) => {
 			setBoardState(createInitialBoardState(numRows, numColumns));
 			setGameComplete(false);
-
-			// Pass in true if you want to increment first turn while reseting board
-			if (incrementFirstTurn) {
-				setTurnCounter(firstTurn + 1);
-				setFirstTurn((currentValue) => currentValue + 1);
-			} else {
-				setTurnCounter(firstTurn);
-			}
-
+			setTurnCounter(firstTurn + 1);
+			setFirstTurn((currentValue) => currentValue + 1);
 			setPlayer1Win(false);
 			setPlayer2Win(false);
 		},
@@ -182,6 +172,8 @@ const App = () => {
 			newBoardState[row][column] = XorO;
 			return newBoardState;
 		});
+
+		setTurnCounter((currentTurnCount) => currentTurnCount + 1);
 	}, []);
 
 	const toggleModal = useCallback(() => {
@@ -220,6 +212,7 @@ const App = () => {
 			turnCounter - firstTurn === rows * columns
 		) {
 			setGameComplete(true);
+			setTurnCounter((currentTurnCount) => currentTurnCount + 1);
 			if (rowWinner === 'X' || columnWinner === 'X' || diagonalWinner === 'X') {
 				setPlayer1Win(true);
 				setPlayer1WinCount((currentWinCount) => currentWinCount + 1);
@@ -231,13 +224,10 @@ const App = () => {
 				setPlayer2Win(true);
 				setPlayer2WinCount((currentWinCount) => currentWinCount + 1);
 			}
-		} else if (!firstRender) {
-			setTurnCounter((currentTurnCount) => currentTurnCount + 1);
 		}
 	}, [boardState]);
 
-	console.log(turnCounter);
-	// console.log(firstRender);
+	console.log(boardState);
 
 	return (
 		<>
@@ -256,8 +246,8 @@ const App = () => {
 						player2Win={player2Win}
 					/>
 					<Grid
-						rows={rows}
-						columns={columns}
+						gridRows={rows}
+						gridColumns={columns}
 						boardState={boardState}
 						turnCounter={turnCounter}
 						gameComplete={gameComplete}
