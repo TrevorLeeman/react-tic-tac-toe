@@ -8,14 +8,15 @@ const StyledPlayer = styled.div`
 	justify-content: center;
 	width: fit-content;
 	font-size: 1.5rem;
+	padding: 1rem;
+	border: 2px solid transparent;
+	transition: all 200ms ease-out;
+
+	${(props) => props.turnActive && 'border-color: purple; border-radius: 1rem;'}
+	${(props) => props.win && 'background-color: green; border-radius: 1rem;'}
 `;
 
-const StyledPlayerName = styled.h2`
-	text-decoration: solid underline transparent 0.3rem;
-	transition: all 300ms ease-out;
-
-	${(props) => props.turnActive && 'text-decoration-color: #7051b8'}
-`;
+const StyledPlayerName = styled.h2``;
 
 const Score = styled.div`
 	font-size: 3rem;
@@ -30,7 +31,8 @@ const checkInputLength = (event) => {
 	}
 };
 
-const Player = ({ name, score, turnActive }) => {
+const Player = ({ name, score, turnActive, win }) => {
+	console.log(win);
 	const [playerName, setPlayerName] = useState(name);
 
 	const updatePlayerName = (event) => {
@@ -38,13 +40,12 @@ const Player = ({ name, score, turnActive }) => {
 	};
 
 	return (
-		<StyledPlayer>
+		<StyledPlayer turnActive={turnActive} win={win}>
 			<StyledPlayerName
 				onKeyPress={checkInputLength}
 				onBlur={updatePlayerName}
 				contentEditable='true'
 				suppressContentEditableWarning={true}
-				turnActive={turnActive}
 			>
 				{playerName}
 			</StyledPlayerName>

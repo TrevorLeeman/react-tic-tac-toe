@@ -52,6 +52,8 @@ const Menu = ({
 	player1Wins,
 	player2Wins,
 	turnCounter,
+	player1Win,
+	player2Win,
 }) => {
 	return (
 		<PlayerInfoControlsWrapper>
@@ -59,6 +61,8 @@ const Menu = ({
 				player1Wins={player1Wins}
 				player2Wins={player2Wins}
 				turnCounter={turnCounter}
+				player1Win={player1Win}
+				player2Win={player2Win}
 			/>
 			<Controls>
 				<StyledResetButton clickHandler={resetBoardState}>

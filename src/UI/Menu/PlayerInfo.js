@@ -10,18 +10,26 @@ const PlayerInfoWrapper = styled.div`
 	border-radius: 1rem 1rem 0 0;
 `;
 
-const PlayerInfo = ({ player1Wins, player2Wins, turnCounter }) => {
+const PlayerInfo = ({
+	player1Wins,
+	player2Wins,
+	turnCounter,
+	player1Win,
+	player2Win,
+}) => {
 	return (
 		<PlayerInfoWrapper>
 			<Player
 				name='Player 1'
 				score={player1Wins}
 				turnActive={turnCounter % 2}
+				win={player1Win}
 			/>
 			<Player
 				name='Player 2'
 				score={player2Wins}
 				turnActive={!(turnCounter % 2)}
+				win={player2Win}
 			/>
 		</PlayerInfoWrapper>
 	);

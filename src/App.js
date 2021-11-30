@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import useFirstRender from './CustomHooks/useFirstRender';
 import Header from './UI/Header';
 import Menu from './UI/Menu/Menu';
 import Grid from './Grid/Grid';
@@ -144,8 +145,12 @@ const App = () => {
 	const [turnCounter, setTurnCounter] = useState(firstTurn);
 	const [gameComplete, setGameComplete] = useState(false);
 	const [modalActive, setModalActive] = useState(false);
+	const [player1Win, setPlayer1Win] = useState(false);
+	const [player2Win, setPlayer2Win] = useState(false);
 	const [player1WinCount, setPlayer1WinCount] = useState(0);
 	const [player2WinCount, setPlayer2WinCount] = useState(0);
+
+	const firstRender = useFirstRender();
 
 	const resetBoardState = useCallback(
 		(
@@ -164,6 +169,9 @@ const App = () => {
 			} else {
 				setTurnCounter(firstTurn);
 			}
+
+			setPlayer1Win(false);
+			setPlayer2Win(false);
 		},
 		[columns, firstTurn, gameComplete, rows]
 	);
@@ -174,8 +182,6 @@ const App = () => {
 			newBoardState[row][column] = XorO;
 			return newBoardState;
 		});
-
-		setTurnCounter((currentTurnCount) => currentTurnCount + 1);
 	}, []);
 
 	const toggleModal = useCallback(() => {
@@ -215,16 +221,23 @@ const App = () => {
 		) {
 			setGameComplete(true);
 			if (rowWinner === 'X' || columnWinner === 'X' || diagonalWinner === 'X') {
+				setPlayer1Win(true);
 				setPlayer1WinCount((currentWinCount) => currentWinCount + 1);
 			} else if (
 				rowWinner === 'O' ||
 				columnWinner === 'O' ||
 				diagonalWinner === 'O'
 			) {
+				setPlayer2Win(true);
 				setPlayer2WinCount((currentWinCount) => currentWinCount + 1);
 			}
+		} else if (!firstRender) {
+			setTurnCounter((currentTurnCount) => currentTurnCount + 1);
 		}
-	}, [boardState, columns, firstTurn, lengthReqForWin, rows, turnCounter]);
+	}, [boardState]);
+
+	console.log(turnCounter);
+	// console.log(firstRender);
 
 	return (
 		<>
@@ -239,6 +252,8 @@ const App = () => {
 						player1Wins={player1WinCount}
 						player2Wins={player2WinCount}
 						turnCounter={turnCounter}
+						player1Win={player1Win}
+						player2Win={player2Win}
 					/>
 					<Grid
 						rows={rows}
