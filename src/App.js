@@ -154,16 +154,19 @@ const App = () => {
 			event,
 			numRows = rows,
 			numColumns = columns,
-			incrementFirstTurn = gameComplete ? true : false
+			incrementFirstTurn = true
 		) => {
 			setBoardState(createInitialBoardState(numRows, numColumns));
 			setGameComplete(false);
-			setTurnCounter(firstTurn + 1);
-			setFirstTurn((currentValue) => currentValue + 1);
 			setPlayer1Win(false);
 			setPlayer2Win(false);
+			setTurnCounter(firstTurn + 1);
+
+			if (incrementFirstTurn) {
+				setFirstTurn((currentValue) => currentValue + 1);
+			}
 		},
-		[columns, firstTurn, gameComplete, rows]
+		[columns, firstTurn, rows]
 	);
 
 	const updateBoardState = useCallback((row, column, XorO) => {
@@ -184,9 +187,9 @@ const App = () => {
 		(numRows, numColumns) => {
 			setRows(numRows);
 			setColumns(numColumns);
-			resetBoardState(null, numRows, numColumns);
+			resetBoardState(null, numRows, numColumns, gameComplete ? true : false);
 		},
-		[resetBoardState]
+		[gameComplete, resetBoardState]
 	);
 
 	// Check for winner when board state changes

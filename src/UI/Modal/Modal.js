@@ -46,10 +46,6 @@ const TitleCloseWrap = styled.div`
 	display: flex;
 	justify-content: space-between;
 	padding-left: 1rem;
-
-	@media (min-width: 400px) {
-		padding-left: 2rem;
-	}
 `;
 
 const Modal = ({ closeSettings, setBoardSize, setConsecutiveToWin }) => {

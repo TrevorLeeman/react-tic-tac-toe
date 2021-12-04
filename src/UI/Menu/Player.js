@@ -17,7 +17,9 @@ const StyledPlayer = styled.div`
 	${(props) => props.win && 'border-color: #109648;'}
 `;
 
-const StyledPlayerName = styled.h2``;
+const StyledPlayerName = styled.h2`
+	white-space: nowrap;
+`;
 
 const Score = styled.div`
 	font-size: 3rem;
