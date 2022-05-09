@@ -29,7 +29,7 @@ const Footer = () => {
 	return (
 		<StyledFooter>
 			<p>
-				© <a href='https://github.com/TrevorLeeman'>Trevor Leeman</a> | 2021
+				© <a href='https://www.trevorleeman.com'>Trevor Leeman</a> | 2021
 			</p>
 		</StyledFooter>
 	);
