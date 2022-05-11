@@ -1,6 +1,6 @@
 {
 	"name": "tic-tac-toe",
-	"homepage": "https://trevorleeman.github.io/react-tic-tac-toe",
+	"homepage": "https://tic-tac-toe.trevorleeman.com",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
