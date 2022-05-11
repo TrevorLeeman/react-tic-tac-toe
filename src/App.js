@@ -227,13 +227,11 @@ const App = () => {
 		}
 	}, [boardState]);
 
-	console.log(boardState);
-
 	return (
 		<>
 			<CssReset />
 			<AppContainer>
-				<Header title='React-Tac-Toe' />
+				<Header title="React-Tac-Toe" />
 				<StyledApp>
 					<Menu
 						gameComplete={gameComplete}
