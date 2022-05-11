@@ -37,8 +37,6 @@ const SocialCard = ({ className }) => {
 					<a
 						href="https://www.github.com/TrevorLeeman"
 						title="Trevor Leeman on GitHub"
-						target="_blank"
-						rel="noreferrer"
 					>
 						<GitHubIcon />
 					</a>
@@ -47,8 +45,6 @@ const SocialCard = ({ className }) => {
 					<a
 						href="https://www.linkedin.com/in/trevor-leeman/"
 						title="Trevor Leeman on LinkedIn"
-						target="_blank"
-						rel="noreferrer"
 					>
 						<LinkedInIcon />
 					</a>

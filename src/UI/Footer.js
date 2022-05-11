@@ -33,8 +33,6 @@ const Footer = () => {
 				<a
 					href="https://www.trevorleeman.com"
 					title="Trevor Leeman's personal website"
-					target="_blank"
-					rel="noreferrer"
 				>
 					Trevor Leeman
 				</a>{' '}
