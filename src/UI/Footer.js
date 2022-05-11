@@ -29,7 +29,16 @@ const Footer = () => {
 	return (
 		<StyledFooter>
 			<p>
-				© <a href='https://www.trevorleeman.com'>Trevor Leeman</a> | 2021
+				©{' '}
+				<a
+					href="https://www.trevorleeman.com"
+					title="Trevor Leeman's personal website"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Trevor Leeman
+				</a>{' '}
+				| 2021
 			</p>
 		</StyledFooter>
 	);

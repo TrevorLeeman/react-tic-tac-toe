@@ -35,16 +35,20 @@ const SocialCard = ({ className }) => {
 			<ul>
 				<li>
 					<a
-						href='https://github.com/TrevorLeeman'
-						title='Trevor Leeman on GitHub'
+						href="https://www.github.com/TrevorLeeman"
+						title="Trevor Leeman on GitHub"
+						target="_blank"
+						rel="noreferrer"
 					>
 						<GitHubIcon />
 					</a>
 				</li>
 				<li>
 					<a
-						href='https://www.linkedin.com/in/trevor-leeman/'
-						title='Trevor Leeman on LinkedIn'
+						href="https://www.linkedin.com/in/trevor-leeman/"
+						title="Trevor Leeman on LinkedIn"
+						target="_blank"
+						rel="noreferrer"
 					>
 						<LinkedInIcon />
 					</a>
