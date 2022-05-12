@@ -20,17 +20,17 @@ const CssReset = createGlobalStyle`
   }
 
   html{
-	font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Saira Condensed', sans-serif;
 
-	font-size: 0.6em;
+    font-size: 0.6em;
 
-	@media (min-width: 420px) {
-		font-size: 0.8em;
-	}
+    @media (min-width: 420px) {
+      font-size: 0.8em;
+    }
 
-	@media (min-width: 600px) {
-		font-size: 1em;
-	}
+    @media (min-width: 600px) {
+      font-size: 1em;
+    }
   }
 `;
 
@@ -113,14 +113,15 @@ const AppContainer = styled.div`
 
 const StyledApp = styled.div`
 	display: grid;
-	grid-template-rows: fit-content 1fr;
+	grid-template-rows: auto 1fr;
 	grid-template-columns: 1fr;
 	grid-template-areas:
 		'controls'
 		'grid';
 	gap: 2rem;
 	place-items: center;
-	padding: 2rem 0;
+	padding: 2rem 1rem;
+	flex-grow: 1;
 
 	@media (min-width: 400px) {
 		padding: 2rem;
