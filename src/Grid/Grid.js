@@ -3,11 +3,8 @@ import GridCell from './GridCell';
 
 const StyledGrid = styled.div`
 	grid-area: grid;
-
-	min-width: 300px;
-	min-height: 300px;
-	max-width: 70vh;
-	max-height: 70vh;
+	aspect-ratio: 1;
+	width: clamp(300px, 100%, 650px);
 
 	background-color: #ffffff80;
 	padding: 1.25rem;
@@ -29,15 +26,9 @@ const StyledGrid = styled.div`
 
 	align-self: start;
 
-	@media (min-width: 300px) {
-		width: 90vw;
-		height: 90vw;
-	}
-
-	@media (min-width: 800px) and (min-height: 800px) {
+	@media (min-width: 1440px) {
 		padding: 2rem;
-		width: 80vw;
-		height: 80vw;
+		width: 70vh;
 	}
 `;
 
