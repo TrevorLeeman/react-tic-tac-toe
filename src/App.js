@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import Header from './UI/Header';
 import Menu from './UI/Menu/Menu';
 import Grid from './Grid/Grid';
 import Footer from './UI/Footer';
@@ -232,7 +231,6 @@ const App = () => {
 		<>
 			<CssReset />
 			<AppContainer>
-				<Header title="React-Tac-Toe" />
 				<StyledApp>
 					<Menu
 						gameComplete={gameComplete}
