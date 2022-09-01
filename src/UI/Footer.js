@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
 		font-size: 1.5rem;
 
 		a {
-			text-decoration: none;
+			text-decoration: underline;
 			color: inherit;
 
 			&:hover {
@@ -30,7 +30,9 @@ const Footer = () => {
 				©{' '}
 				<a
 					href="https://www.trevorleeman.com"
-					title="Trevor Leeman's personal website"
+					title="Trevor Leeman's portfolio website"
+          target="_blank"
+          rel="noreferrer"
 				>
 					Trevor Leeman
 				</a>{' '}
