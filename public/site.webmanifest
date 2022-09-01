@@ -1,6 +1,6 @@
 {
-	"short_name": "React-Tac-Toe",
-	"name": "React-Tac-Toe by Trevor Leeman",
+	"short_name": "Tic-Tac-Toe",
+	"name": "Tic-Tac-Toe by Trevor Leeman",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -15,7 +15,7 @@
 			"purpose": "maskable"
 		}
 	],
-	"start_url": ".",
+	"start_url": "/",
 	"display": "standalone",
 	"theme_color": "#553795",
 	"background_color": "#ffffff"
