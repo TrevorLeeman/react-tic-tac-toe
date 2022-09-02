@@ -20,8 +20,8 @@
 			"type": "image/png"
     }
 	],
-	"start_url": "",
-  "scope": "",
+	"start_url": "https://tic-tac-toe.trevorleeman.com/",
+  "scope": "https://tic-tac-toe.trevorleeman.com/",
 	"display": "standalone",
 	"theme_color": "#553795",
 	"background_color": "#ffffff"
